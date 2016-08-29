@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 
 
 ## [Unreleased]
+### Added
+- Basic styling provided by the plugin from css/styles.css
 
 
 ## [0.1.0 - 2016/08/25]

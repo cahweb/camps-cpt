@@ -3,8 +3,7 @@
 /*
  *
  * Plugin Name: Common - Camps CPT
- * Description: Camps plugin, for use on SPA for the summer music camps. Moving it to a plugin because it's pretty big to be in the
- * 				functions.php
+ * Description: Camps plugin, for use on SPA for the summer music camps. Moving it to a plugin because it's pretty big.
  * Author: Austin Tindle
  *
  */
@@ -20,6 +19,12 @@ $settings = array (
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
+
+// Load our CSS
+function camps_load_plugin_css() {
+    wp_enqueue_style( 'camps-plugin-style', plugin_dir_url(__FILE__) . 'css/style.css');
+}
+add_action( 'admin_enqueue_scripts', 'camps_load_plugin_css' );
 
 // Add create function to init
 add_action('init', 'create_camps_type');
@@ -59,12 +64,12 @@ function camp_meta_required() {
     $custom = get_post_custom($post->ID); // Set our custom values to an array in the global post var
 
     // Values
-    $subtitle = $custom["subtitle"][0];
     $start_date = $custom["start_date"][0];
     $end_date = $custom["end_date"][0];
     $location = $custom["location"][0];
     $location_url = $custom["location_url"][0];
     $description = $custom["description"][0];
+    $cost = $custom["cost"][0];
 	// Contact info
 	$contact_name = $custom["contact_name"][0];
 	$contact_email = $custom["contact_email"][0];
@@ -82,8 +87,7 @@ function camp_meta_general() {
     // Values
     $eligibility = $custom["eligibility"][0];
     $ability_level = $custom["ability_level"][0];
-    $cost = $custom["cost"][0];
-	$auditions = $custom["auditions"][0];
+   	$auditions = $custom["auditions"][0];
 	$instruments = $custom["instruments"][0];
 	$private_lessons = $custom["private_lessons"][0];
 	$staff = $custom["staff"][0];
@@ -130,7 +134,6 @@ function camp_meta_registration() {
 function save_camps() {
 	global $post;
 	// Top level information displayed for every camp
-	update_post_meta($post->ID, "subtitle", $_POST["subtitle"]);
 	update_post_meta($post->ID, "start_date", $_POST["start_date"]);
 	update_post_meta($post->ID, "end_date", $_POST["end_date"]);
 	update_post_meta($post->ID, "location", $_POST["location"]);
@@ -165,5 +168,6 @@ function save_camps() {
 	update_post_meta($post->ID, "register_files", $_POST["register_files"]);
 	update_post_meta($post->ID, "discounts", $_POST["discounts"]);
 }
+
 
 ?>

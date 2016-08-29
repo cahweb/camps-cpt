@@ -1,0 +1,12 @@
+.table tr td input[type="text"],
+.table tr td input[type="email"],
+.table tr td input[type="url"] {
+	width: 400px;
+}
+
+.table th,
+h4 {
+	text-align: left;
+	font-size: 1em;
+	padding: 25px 0 10px 0 !important;
+}
