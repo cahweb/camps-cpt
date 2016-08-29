@@ -4,16 +4,12 @@
 
 <table class="table">
 
-	<!-- subtitle -->
-	<tr>
-		<td><label>Subtitle:</label></td>
-		<td><input type="text" name="subtitle" value="<?php echo $subtitle; ?>"></td>
-	</tr>
-
 	<!-- dates -->
 	<tr>
 		<td><label>Start Date:</label></td>
 		<td><input type="date" name="start_date" value="<?php echo $start_date; ?>"></td>
+	</tr>
+	<tr>
 		<td><label>End Date:</label></td>
 		<td><input type="date" name="end_date" value="<?php echo $end_date; ?>"></td>
 	</tr>
@@ -41,7 +37,7 @@
 		<td><input type="text" name="cost" value="<?php echo $cost; ?>" placeholder="$"></td>
 	</tr>
 
-	<th>Contact</th>
+	<th>Contact:</th>
 
 	<!-- contact_name -->
 	<tr>

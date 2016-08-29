@@ -2,6 +2,7 @@
 <br>
 <label>File/Form:</label>
 <input type="file" name="registration_files" value="<?php echo $registration_files; ?>">
+<br>
 
 <!-- how_to_register -->
 <h4>How to Register:</h4>
