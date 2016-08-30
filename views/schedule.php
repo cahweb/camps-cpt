@@ -2,18 +2,18 @@
 /* Schedule form */
 ?>
 
-<!-- checkin -->
-<label>Check-in:</label>
-<input type="time" name="checkin" value="<?php echo $checkin; ?>">
-
-<!-- checkout -->
-<label>Check-out:</label>
-<input type="time" name="checkout" value="<?php echo $checkout; ?>">
-
 <!-- schedule_files -->
 <br>
 <label>File/Form:</label>
 <input type="file" name="schedule_files" value="<?php echo $schedule_files; ?>">
+
+<!-- checkin -->
+<h4>Check-in:</h4>
+<?php wp_editor($checkin, 'checkin', $settings['sm']); ?>
+
+<!-- checkout -->
+<h4>Check-out:</h4>
+<?php wp_editor($checkout, 'checkout', $settings['sm']); ?>
 
 <!-- concert_schedule -->
 <h4>Concert Schedule:</h4>
