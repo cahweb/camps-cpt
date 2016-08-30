@@ -7,8 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 ### Added
 - Basic styling provided by the plugin from css/styles.css
 
+### Fixed
+- 'What to Pack' field was stored incorrectly
 
-## [0.1.0 - 2016/08/25]
+
+## [0.1.0] - 2016/08/25
 ### Added
 - All necessary value fields.
 - Basic functionality and styling of the panel.

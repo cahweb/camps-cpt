@@ -108,7 +108,7 @@ function camp_meta_schedule() {
 	$concert_schedule = $custom["concert_schedule"][0];
 	$activity_schedule = $custom["activity_schedule"][0];
 	$schedule_files = $custom["schedule_files"][0];
-	$what_to_bring = $custom["what_to_bring"][0];
+	$what_to_pack = $custom["what_to_pack"][0];
 	$housing = $custom["housing"][0];
 	$shuttle_service = $custom["shuttle_service"][0];
 
@@ -159,7 +159,7 @@ function save_camps() {
 	update_post_meta($post->ID, "concert_schedule", $_POST["concert_schedule"]);
 	update_post_meta($post->ID, "activity_schedule", $_POST["activity_schedule"]);
 	update_post_meta($post->ID, "schedule_files", $_POST["schedule_files"]);
-	update_post_meta($post->ID, "what_to_bring", $_POST["what_to_bring"]);
+	update_post_meta($post->ID, "what_to_pack", $_POST["what_to_pack"]);
 	update_post_meta($post->ID, "housing", $_POST["housing"]);
 	update_post_meta($post->ID, "shuttle_service", $_POST["shuttle_service"]);
 
