@@ -16,9 +16,16 @@ $settings = array (
 
 /* Camps Custom Post Type ------------------- */
 
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Set form Enctype
+add_action('post_edit_form_tag', 'add_post_enctype');
+
+function add_post_enctype() {
+    echo ' enctype="multipart/form-data"';
+}
 
 // Load our CSS
 function camps_load_plugin_css() {
@@ -112,6 +119,9 @@ function camp_meta_schedule() {
 	$housing = $custom["housing"][0];
 	$shuttle_service = $custom["shuttle_service"][0];
 
+	// Set up file attachment
+
+
 	// Form markup 
     include_once('views/schedule.php');
 }
@@ -158,15 +168,60 @@ function save_camps() {
 	update_post_meta($post->ID, "checkout", $_POST["checkout"]);
 	update_post_meta($post->ID, "concert_schedule", $_POST["concert_schedule"]);
 	update_post_meta($post->ID, "activity_schedule", $_POST["activity_schedule"]);
-	update_post_meta($post->ID, "schedule_files", $_POST["schedule_files"]);
 	update_post_meta($post->ID, "what_to_pack", $_POST["what_to_pack"]);
 	update_post_meta($post->ID, "housing", $_POST["housing"]);
 	update_post_meta($post->ID, "shuttle_service", $_POST["shuttle_service"]);
 
 	// Registration info
 	update_post_meta($post->ID, "how_to_register", $_POST["how_to_register"]);
-	update_post_meta($post->ID, "register_files", $_POST["register_files"]);
 	update_post_meta($post->ID, "discounts", $_POST["discounts"]);
+
+	// File Attachements
+	// Schedule Files
+	if(!empty($_FILES['schedule_files']['name'])) { 
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+
+		$override['action'] = 'editpost';
+		$uploaded_file = wp_handle_upload($_FILES['schedule_files'], $override);
+		$post_id = $post->ID;
+
+		$attachment = array(
+			'post_title' => $_FILES['schedule_files']['name'],
+			'post_content' => '',
+			'post_type' => 'attachment',
+			'post_parent' => $post_id,
+			'post_mime_type' => $_FILES['schedule_files']['type'],
+			'guid' => $uploaded_file['url']
+		);
+
+		// Save the data
+		$id = wp_insert_attachment( $attachment,$_FILES['schedule_files'][ 'file' ], $post_id );
+		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $_FILES['schedule_files']['file'] ) );
+		update_post_meta($post->ID, "schedule_files", $uploaded_file['url']);
+	}
+
+	// Register Files
+	if(!empty($_FILES['register_files']['name'])) { 
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+
+		$override['action'] = 'editpost';
+		$uploaded_file = wp_handle_upload($_FILES['register_files'], $override);
+		$post_id = $post->ID;
+
+		$attachment = array(
+			'post_title' => $_FILES['register_files']['name'],
+			'post_content' => '',
+			'post_type' => 'attachment',
+			'post_parent' => $post_id,
+			'post_mime_type' => $_FILES['register_files']['type'],
+			'guid' => $uploaded_file['url']
+		);
+
+		// Save the data
+		$id = wp_insert_attachment( $attachment,$_FILES['register_files'][ 'file' ], $post_id );
+		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $_FILES['register_files']['file'] ) );
+		update_post_meta($post->ID, "register_files", $uploaded_file['url']);
+	}
 }
 
 

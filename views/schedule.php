@@ -5,7 +5,8 @@
 <!-- schedule_files -->
 <br>
 <label>File/Form:</label>
-<input type="file" name="schedule_files" value="<?php echo $schedule_files; ?>">
+<input type="file" name="schedule_files" value="">
+<p>Current file: <?php echo substr( strrchr( $schedule_files, '/' ), 1 ); ?></p>
 
 <!-- checkin -->
 <h4>Check-in:</h4>
